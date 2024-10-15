@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            background-color: #f0f2f5; /* Light gray background */
+            font-family: Arial, sans-serif; /* Font style */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            margin: 0; /* Remove default margin */
+        }
+        
+        .login-container {
+            background-color: #ffffff; /* White background for the container */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            padding: 40px; /* Padding inside the container */
+            width: 400px; /* Fixed width for the login box */
+        }
+        
+        h1 {
+            text-align: center; /* Center the heading */
+            color: #333; /* Darker color for text */
+        }
+        
+        .input-group {
+            margin-bottom: 20px; /* Space between input fields */
+        }
+        
+        label {
+            display: block; /* Make label block level */
+            margin-bottom: 5px; /* Space below label */
+            color: #555; /* Gray color for labels */
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            width: 100%; /* Full width */
+            padding: 10px; /* Padding inside input */
+            border: 1px solid #ddd; /* Light border */
+            border-radius: 4px; /* Rounded corners for input */
+            font-size: 16px; /* Font size for input text */
+            transition: border-color 0.3s; /* Smooth transition for border */
+        }
+        
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff; /* Highlight border on focus */
+            outline: none; /* Remove default outline */
+        }
+        
+        .btn {
+            background-color: #007bff; /* Bootstrap primary color */
+            color: #fff; /* White text */
+            padding: 10px; /* Padding inside button */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners for button */
+            cursor: pointer; /* Pointer cursor on hover */
+            width: 100%; /* Full width */
+            font-size: 16px; /* Font size */
+            transition: background-color 0.3s; /* Smooth transition for background */
+        }
+        
+        .btn:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        
+        .register-link {
+            text-align: center; /* Center the register link */
+            margin-top: 15px; /* Space above link */
+        }
+        
+        .register-link a {
+            color: #007bff; /* Blue color for the link */
+            text-decoration: none; /* Remove underline */
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+        
+        .messages {
+            list-style: none; /* Remove bullet points */
+            padding: 0; /* Remove padding */
+            margin: 10px 0; /* Margin above and below */
+        }
+        
+        .messages li {
+            color: red; /* Color for error messages */
+            text-align: center; /* Center the message */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <p class="register-link">Don't have an account? <a href="{% url 'register' %}">Register here</a>.</p>
+    </div>
+</body>
+</html>
